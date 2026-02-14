@@ -17,23 +17,25 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange, t }) =>
   ];
 
   return (
-    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm glass rounded-3xl p-3 flex justify-around items-center shadow-2xl z-50">
+    <nav className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-sm glass rounded-[2.5rem] p-3 flex justify-around items-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[100] border border-white/10">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`relative p-3 rounded-2xl transition-all duration-300 ${
+          className={`relative p-4 rounded-3xl transition-all duration-300 active:scale-75 ${
             activeTab === tab.id 
-              ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 -translate-y-2' 
+              ? 'bg-emerald-500 text-white shadow-xl shadow-emerald-500/40 -translate-y-4' 
               : 'text-slate-400 hover:text-emerald-500'
           }`}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={tab.icon} />
           </svg>
-          <span className={`absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium transition-all duration-300 opacity-0 ${activeTab === tab.id ? 'opacity-100 bottom-1' : ''}`}>
-             {t[tab.id]}
-          </span>
+          {activeTab === tab.id && (
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[8px] font-black uppercase tracking-tighter text-emerald-400 whitespace-nowrap">
+              {t[tab.id]}
+            </span>
+          )}
         </button>
       ))}
     </nav>
